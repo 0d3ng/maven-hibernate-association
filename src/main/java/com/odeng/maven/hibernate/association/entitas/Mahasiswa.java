@@ -93,6 +93,13 @@ public class Mahasiswa implements Serializable {
         this.alamat = alamat;
     }
 
+    public void removeAlamat() {
+        if (alamat != null) {
+            alamat.setMahasiswa(null);
+            alamat = null;
+        }
+    }
+
     @Override
     public String toString() {
         return "Mahasiswa{" + "nim=" + nim + ", nama=" + nama + ", ipk=" + ipk + ", jurusan=" + jurusan + ", alamat=" + alamat + '}';
