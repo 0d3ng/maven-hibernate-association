@@ -42,7 +42,6 @@ Contributor(s):
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate_db?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hbm2ddl.auto">update</property>

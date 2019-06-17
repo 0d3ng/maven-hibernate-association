@@ -13,9 +13,11 @@ package com.odeng.maven.hibernate.association.entitas;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -34,6 +36,9 @@ public class Alamat implements Serializable {
     private int RW;
     private String kota;
     private String provinsi;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nim")
+    private Mahasiswa mahasiswa;
 
     public Alamat() {
     }
@@ -92,6 +97,14 @@ public class Alamat implements Serializable {
 
     public void setProvinsi(String provinsi) {
         this.provinsi = provinsi;
+    }
+
+    public Mahasiswa getMahasiswa() {
+        return mahasiswa;
+    }
+
+    public void setMahasiswa(Mahasiswa mahasiswa) {
+        this.mahasiswa = mahasiswa;
     }
 
     @Override

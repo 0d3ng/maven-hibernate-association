@@ -16,8 +16,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,8 +32,7 @@ public class Mahasiswa implements Serializable {
     private String nama;
     private float ipk;
     private String jurusan;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinTable(name = "Mahasiswa_Alamat",joinColumns = @JoinColumn(name = "nim"),inverseJoinColumns = @JoinColumn(name = "alamat_id"))
+    @OneToOne(mappedBy = "mahasiswa", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Alamat alamat;
 
     public Mahasiswa() {
@@ -86,6 +83,13 @@ public class Mahasiswa implements Serializable {
     }
 
     public void setAlamat(Alamat alamat) {
+        if (alamat == null) {
+            if (this.alamat != null) {
+                this.alamat.setMahasiswa(null);
+            }
+        } else {
+            alamat.setMahasiswa(this);
+        }
         this.alamat = alamat;
     }
 

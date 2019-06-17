@@ -43,6 +43,7 @@ public class MahasiswaServiceImplTest {
     public void testSave() {
         Alamat a = new Alamat("Jln. Simpang Setaman 1", 6, 15, "Malanga", "Jawa Timur");
         Mahasiswa m = new Mahasiswa("075410099", "Noprianto", 3.99F, "Teknologi Informasi", a);
+        m.setAlamat(a);
         assertTrue(service.save(m));
     }
 
