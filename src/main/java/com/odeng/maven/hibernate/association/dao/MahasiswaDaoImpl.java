@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -85,6 +86,18 @@ public class MahasiswaDaoImpl implements MahasiswaDao {
             Logger.getLogger(MahasiswaDaoImpl.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             session.close();
+        }
+        return null;
+    }
+
+    @Override
+    public Mahasiswa getMahasiswaByNim(String nim) {
+        try {
+            Query query = session.createQuery("FROM Mahasiswa m WHERE m.nim=:nim");
+            query.setParameter("nim", nim);
+            return (Mahasiswa) query.uniqueResult();
+        } catch (Exception e) {
+            Logger.getLogger(MahasiswaDaoImpl.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
     }

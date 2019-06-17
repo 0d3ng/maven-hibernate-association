@@ -17,6 +17,7 @@ import com.odeng.maven.hibernate.association.entitas.Mahasiswa;
  *
  * @author od3ng
  */
-public interface MahasiswaDao extends GenericRepository<Mahasiswa>{
-    
+public interface MahasiswaDao extends GenericRepository<Mahasiswa> {
+
+    public Mahasiswa getMahasiswaByNim(String nim);
 }

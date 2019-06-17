@@ -47,4 +47,9 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         return dao.getAll();
     }
 
+    @Override
+    public Mahasiswa getMahasiswaByNim(String nim) {
+        return dao.getMahasiswaByNim(nim);
+    }
+
 }
