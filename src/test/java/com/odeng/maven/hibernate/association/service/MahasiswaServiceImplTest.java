@@ -38,7 +38,7 @@ public class MahasiswaServiceImplTest {
         HibernateUtil.shutdown();
     }
 
-    @Ignore
+//    @Ignore
     @Test
     public void testSave() {
         Alamat a = new Alamat("Jln. Simpang Setaman 1", 6, 15, "Malanga", "Jawa Timur");
@@ -46,7 +46,7 @@ public class MahasiswaServiceImplTest {
         assertTrue(service.save(m));
     }
 
-//    @Ignore
+    @Ignore
     @Test
     public void testDelete() {
         Mahasiswa m = service.getMahasiswaByNim("075410099");

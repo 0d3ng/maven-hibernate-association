@@ -17,6 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,7 +35,7 @@ public class Mahasiswa implements Serializable {
     private float ipk;
     private String jurusan;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "alamat_id")
+    @JoinTable(name = "Mahasiswa_Alamat",joinColumns = @JoinColumn(name = "nim"),inverseJoinColumns = @JoinColumn(name = "alamat_id"))
     private Alamat alamat;
 
     public Mahasiswa() {
