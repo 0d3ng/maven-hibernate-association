@@ -40,8 +40,6 @@ public class MahasiswaDaoImpl implements MahasiswaDao {
         } catch (Exception e) {
             Logger.getLogger(MahasiswaDaoImpl.class.getName()).log(Level.SEVERE, null, e);
             session.getTransaction().rollback();
-        } finally {
-            session.close();
         }
         return false;
     }

@@ -12,8 +12,9 @@
 package com.odeng.maven.hibernate.association.service;
 
 import com.odeng.maven.hibernate.association.entitas.Mahasiswa;
-import com.odeng.maven.hibernate.association.entitas.MataKuliah;
+import com.odeng.maven.hibernate.association.entitas.Tugas;
 import com.odeng.maven.hibernate.association.util.HibernateUtil;
+import java.util.Date;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,11 +41,14 @@ public class MahasiswaServiceImplTest {
     @Test
     public void testSave() {
         Mahasiswa m = new Mahasiswa("075410099", "Noprianto", 3.99F, "Teknologi Informasi");
-        m.getMataKuliahs().add(new MataKuliah("001", "Algoritma dan Pemrograman", (short) 3));
-        m.getMataKuliahs().add(new MataKuliah("002", "Praktikum Algoritma dan Pemrograman", (short) 2));
-        m.getMataKuliahs().add(new MataKuliah("003", "Struktur Data", (short) 3));
-        m.getMataKuliahs().add(new MataKuliah("004", "Praktikum Struktur Data", (short) 2));
+        Mahasiswa m2 = new Mahasiswa("075410100", "Noureen Akhleema Shannum", 4F, "Teknologi Informasi");
+        Tugas t = new Tugas("Buat web menggunakan teknologi hibernate", new Date());
+        Tugas t1 = new Tugas("Buat aplikasi mobile dengan penggunaan Fragment", new Date());
+        m.getTugases().add(t);
+        m.getTugases().add(t1);
+        m2.getTugases().add(t);
         assertTrue(service.save(m));
+        assertTrue(service.save(m2));
     }
 
 }
