@@ -17,7 +17,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,8 +33,8 @@ public class Mahasiswa implements Serializable {
     private String nama;
     private float ipk;
     private String jurusan;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Tugas> tugases = new ArrayList<>();
+    @OneToMany(mappedBy = "mahasiswa", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MahasiswaTugas> tugases = new ArrayList<>();
 
     public Mahasiswa() {
     }
@@ -79,11 +78,25 @@ public class Mahasiswa implements Serializable {
         this.jurusan = jurusan;
     }
 
-    public List<Tugas> getTugases() {
+    public void addTugas(Tugas tugas) {
+        MahasiswaTugas mahasiswaTugas = new MahasiswaTugas(this, tugas);
+        tugases.add(mahasiswaTugas);
+        tugas.getMahasiswas().add(mahasiswaTugas);
+    }
+
+    public void removeTugas(Tugas tugas) {
+        MahasiswaTugas mahasiswaTugas = new MahasiswaTugas(this, tugas);
+        tugas.getMahasiswas().remove(mahasiswaTugas);
+        tugases.remove(mahasiswaTugas);
+        mahasiswaTugas.setMahasiswa(null);
+        mahasiswaTugas.setTugas(null);
+    }
+
+    public List<MahasiswaTugas> getTugases() {
         return tugases;
     }
 
-    public void setTugases(List<Tugas> tugases) {
+    public void setTugases(List<MahasiswaTugas> tugases) {
         this.tugases = tugases;
     }
 

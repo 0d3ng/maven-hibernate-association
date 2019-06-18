@@ -48,5 +48,6 @@ Contributor(s):
     <property name="hibernate.connection.username">root</property>
     <mapping class="com.odeng.maven.hibernate.association.entitas.Mahasiswa"/>
     <mapping class="com.odeng.maven.hibernate.association.entitas.Tugas"/>
+    <mapping class="com.odeng.maven.hibernate.association.entitas.MahasiswaTugas"/>
   </session-factory>
 </hibernate-configuration>

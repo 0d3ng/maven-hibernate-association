@@ -13,6 +13,8 @@ package com.odeng.maven.hibernate.association.util;
 
 import com.odeng.maven.hibernate.association.dao.MahasiswaDao;
 import com.odeng.maven.hibernate.association.dao.MahasiswaDaoImpl;
+import com.odeng.maven.hibernate.association.dao.TugasDao;
+import com.odeng.maven.hibernate.association.dao.TugasDaoImpl;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.HibernateException;
@@ -26,11 +28,12 @@ import org.hibernate.cfg.Configuration;
  * @author od3ng
  */
 public class HibernateUtil {
-
+    
     private static final SessionFactory SESSION_FACTORY;
-
+    
     private static MahasiswaDao mahasiswaDao;
-
+    private static TugasDao tugasDao;
+    
     static {
         try {
             SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
@@ -39,18 +42,25 @@ public class HibernateUtil {
             throw new ExceptionInInitializerError(ex);
         }
     }
-
+    
     private static SessionFactory getSESSION_FACTORY() {
         return SESSION_FACTORY;
     }
-
+    
     public static MahasiswaDao getMahasiswaDao() {
         if (mahasiswaDao == null) {
             mahasiswaDao = new MahasiswaDaoImpl(getSESSION_FACTORY().openSession());
         }
         return mahasiswaDao;
     }
-
+    
+    public static TugasDao getTugasDao() {
+        if (tugasDao == null) {
+            tugasDao = new TugasDaoImpl(getSESSION_FACTORY().openSession());
+        }
+        return tugasDao;
+    }
+    
     public static void shutdown() {
         try {
             SESSION_FACTORY.close();

@@ -15,10 +15,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -36,8 +37,8 @@ public class Tugas implements Serializable {
     private String nama;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date tanggal_submitted;
-    @ManyToMany(mappedBy = "tugases")
-    private List<Mahasiswa> mahasiswas = new ArrayList<>();
+    @OneToMany(mappedBy = "tugas",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<MahasiswaTugas> mahasiswas = new ArrayList<>();
 
     public Tugas() {
     }
@@ -71,11 +72,11 @@ public class Tugas implements Serializable {
         this.tanggal_submitted = tanggal_submitted;
     }
 
-    public List<Mahasiswa> getMahasiswas() {
+    public List<MahasiswaTugas> getMahasiswas() {
         return mahasiswas;
     }
 
-    public void setMahasiswas(List<Mahasiswa> mahasiswas) {
+    public void setMahasiswas(List<MahasiswaTugas> mahasiswas) {
         this.mahasiswas = mahasiswas;
     }
 

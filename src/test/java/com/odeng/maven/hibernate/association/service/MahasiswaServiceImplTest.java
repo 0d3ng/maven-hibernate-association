@@ -12,6 +12,7 @@
 package com.odeng.maven.hibernate.association.service;
 
 import com.odeng.maven.hibernate.association.entitas.Mahasiswa;
+import com.odeng.maven.hibernate.association.entitas.MahasiswaTugas;
 import com.odeng.maven.hibernate.association.entitas.Tugas;
 import com.odeng.maven.hibernate.association.util.HibernateUtil;
 import java.util.Date;
@@ -26,11 +27,13 @@ import static org.junit.Assert.*;
  */
 public class MahasiswaServiceImplTest {
 
-    MahasiswaService service;
+    MahasiswaService serviceMhs;
+    TugasService tugasService;
 
     @Before
     public void setUp() {
-        service = new MahasiswaServiceImpl(HibernateUtil.getMahasiswaDao());
+        serviceMhs = new MahasiswaServiceImpl(HibernateUtil.getMahasiswaDao());
+        tugasService = new TugasServiceImpl(HibernateUtil.getTugasDao());
     }
 
     @After
@@ -42,13 +45,15 @@ public class MahasiswaServiceImplTest {
     public void testSave() {
         Mahasiswa m = new Mahasiswa("075410099", "Noprianto", 3.99F, "Teknologi Informasi");
         Mahasiswa m2 = new Mahasiswa("075410100", "Noureen Akhleema Shannum", 4F, "Teknologi Informasi");
+        
         Tugas t = new Tugas("Buat web menggunakan teknologi hibernate", new Date());
         Tugas t1 = new Tugas("Buat aplikasi mobile dengan penggunaan Fragment", new Date());
-        m.getTugases().add(t);
-        m.getTugases().add(t1);
-        m2.getTugases().add(t);
-        assertTrue(service.save(m));
-        assertTrue(service.save(m2));
+       
+        assertTrue(serviceMhs.save(m));
+        assertTrue(serviceMhs.save(m2));
+        assertTrue(tugasService.save(t));
+        assertTrue(tugasService.save(t1));
+
     }
 
 }
