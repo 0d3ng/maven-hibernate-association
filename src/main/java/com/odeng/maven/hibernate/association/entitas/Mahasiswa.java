@@ -19,6 +19,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -36,7 +37,7 @@ public class Mahasiswa implements Serializable {
     private float ipk;
     private String jurusan;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "nim")
+    @JoinTable(name = "mhs_mk", joinColumns = @JoinColumn(name = "nim"), inverseJoinColumns = @JoinColumn(name = "kode_mk"))
     private List<MataKuliah> mataKuliahs = new ArrayList<MataKuliah>();
 
     public Mahasiswa() {
@@ -93,7 +94,5 @@ public class Mahasiswa implements Serializable {
     public String toString() {
         return "Mahasiswa{" + "nim=" + nim + ", nama=" + nama + ", ipk=" + ipk + ", jurusan=" + jurusan + '}';
     }
-
-    
 
 }
