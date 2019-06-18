@@ -36,8 +36,7 @@ public class Mahasiswa implements Serializable {
     private String nama;
     private float ipk;
     private String jurusan;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinTable(name = "mhs_mk", joinColumns = @JoinColumn(name = "nim"), inverseJoinColumns = @JoinColumn(name = "kode_mk"))
+    @OneToMany(mappedBy = "mahasiswa", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MataKuliah> mataKuliahs = new ArrayList<MataKuliah>();
 
     public Mahasiswa() {

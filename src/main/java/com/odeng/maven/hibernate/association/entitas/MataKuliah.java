@@ -14,7 +14,10 @@ package com.odeng.maven.hibernate.association.entitas;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -31,6 +34,9 @@ public class MataKuliah implements Serializable {
     @Column(name = "nama_mata_kuliah")
     private String namaMataKuliah;
     private short sks;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nim")
+    private Mahasiswa mahasiswa;
 
     public MataKuliah() {
     }
@@ -63,6 +69,14 @@ public class MataKuliah implements Serializable {
 
     public void setSks(short sks) {
         this.sks = sks;
+    }
+
+    public Mahasiswa getMahasiswa() {
+        return mahasiswa;
+    }
+
+    public void setMahasiswa(Mahasiswa mahasiswa) {
+        this.mahasiswa = mahasiswa;
     }
 
 }
