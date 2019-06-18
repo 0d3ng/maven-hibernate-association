@@ -11,7 +11,6 @@
  */
 package com.odeng.maven.hibernate.association.service;
 
-import com.odeng.maven.hibernate.association.entitas.Alamat;
 import com.odeng.maven.hibernate.association.entitas.Mahasiswa;
 import com.odeng.maven.hibernate.association.entitas.MataKuliah;
 import com.odeng.maven.hibernate.association.util.HibernateUtil;

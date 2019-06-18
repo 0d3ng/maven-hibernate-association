@@ -12,6 +12,7 @@
 package com.odeng.maven.hibernate.association.entitas;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -25,7 +26,9 @@ import javax.persistence.Table;
 public class MataKuliah implements Serializable {
 
     @Id
+    @Column(name = "kode_mata_kuliah")
     private String kodeMataKuliah;
+    @Column(name = "nama_mata_kuliah")
     private String namaMataKuliah;
     private short sks;
 
