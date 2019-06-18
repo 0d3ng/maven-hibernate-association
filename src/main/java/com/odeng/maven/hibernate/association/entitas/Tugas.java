@@ -35,7 +35,9 @@ public class Tugas implements Serializable {
     private int id;
     private String nama;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date tanggal_submitted;    
+    private Date tanggal_submitted;
+    @ManyToMany(mappedBy = "tugases")
+    private List<Mahasiswa> mahasiswas = new ArrayList<>();
 
     public Tugas() {
     }
@@ -67,6 +69,14 @@ public class Tugas implements Serializable {
 
     public void setTanggal_submitted(Date tanggal_submitted) {
         this.tanggal_submitted = tanggal_submitted;
+    }
+
+    public List<Mahasiswa> getMahasiswas() {
+        return mahasiswas;
+    }
+
+    public void setMahasiswas(List<Mahasiswa> mahasiswas) {
+        this.mahasiswas = mahasiswas;
     }
 
 }
