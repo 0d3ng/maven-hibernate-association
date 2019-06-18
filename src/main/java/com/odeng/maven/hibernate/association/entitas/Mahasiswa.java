@@ -12,11 +12,13 @@
 package com.odeng.maven.hibernate.association.entitas;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +26,7 @@ import javax.persistence.Table;
  * @author od3ng
  */
 @Entity
-@Table
+@Table(name = "mahasiswa")
 public class Mahasiswa implements Serializable {
 
     @Id
@@ -32,18 +34,17 @@ public class Mahasiswa implements Serializable {
     private String nama;
     private float ipk;
     private String jurusan;
-    @OneToOne(mappedBy = "mahasiswa", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private Alamat alamat;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<MataKuliah> mataKuliahs = new ArrayList<MataKuliah>();
 
     public Mahasiswa() {
     }
 
-    public Mahasiswa(String nim, String nama, float ipk, String jurusan, Alamat alamat) {
+    public Mahasiswa(String nim, String nama, float ipk, String jurusan) {
         this.nim = nim;
         this.nama = nama;
         this.ipk = ipk;
         this.jurusan = jurusan;
-        this.alamat = alamat;
     }
 
     public String getNim() {
@@ -78,31 +79,19 @@ public class Mahasiswa implements Serializable {
         this.jurusan = jurusan;
     }
 
-    public Alamat getAlamat() {
-        return alamat;
+    public List<MataKuliah> getMataKuliahs() {
+        return mataKuliahs;
     }
 
-    public void setAlamat(Alamat alamat) {
-        if (alamat == null) {
-            if (this.alamat != null) {
-                this.alamat.setMahasiswa(null);
-            }
-        } else {
-            alamat.setMahasiswa(this);
-        }
-        this.alamat = alamat;
-    }
-
-    public void removeAlamat() {
-        if (alamat != null) {
-            alamat.setMahasiswa(null);
-            alamat = null;
-        }
+    public void setMataKuliahs(List<MataKuliah> mataKuliahs) {
+        this.mataKuliahs = mataKuliahs;
     }
 
     @Override
     public String toString() {
-        return "Mahasiswa{" + "nim=" + nim + ", nama=" + nama + ", ipk=" + ipk + ", jurusan=" + jurusan + ", alamat=" + alamat + '}';
+        return "Mahasiswa{" + "nim=" + nim + ", nama=" + nama + ", ipk=" + ipk + ", jurusan=" + jurusan + '}';
     }
+
+    
 
 }

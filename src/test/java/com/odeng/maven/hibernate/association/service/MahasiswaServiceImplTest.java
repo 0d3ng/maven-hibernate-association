@@ -13,12 +13,12 @@ package com.odeng.maven.hibernate.association.service;
 
 import com.odeng.maven.hibernate.association.entitas.Alamat;
 import com.odeng.maven.hibernate.association.entitas.Mahasiswa;
+import com.odeng.maven.hibernate.association.entitas.MataKuliah;
 import com.odeng.maven.hibernate.association.util.HibernateUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 
 /**
  *
@@ -38,20 +38,14 @@ public class MahasiswaServiceImplTest {
         HibernateUtil.shutdown();
     }
 
-//    @Ignore
     @Test
     public void testSave() {
-        Alamat a = new Alamat("Jln. Simpang Setaman 1", 6, 15, "Malanga", "Jawa Timur");
-        Mahasiswa m = new Mahasiswa("075410099", "Noprianto", 3.99F, "Teknologi Informasi", a);
-        m.setAlamat(a);
+        Mahasiswa m = new Mahasiswa("075410099", "Noprianto", 3.99F, "Teknologi Informasi");
+        m.getMataKuliahs().add(new MataKuliah("001", "Algoritma dan Pemrograman", (short) 3));
+        m.getMataKuliahs().add(new MataKuliah("002", "Praktikum Algoritma dan Pemrograman", (short) 2));
+        m.getMataKuliahs().add(new MataKuliah("003", "Struktur Data", (short) 3));
+        m.getMataKuliahs().add(new MataKuliah("004", "Praktikum Struktur Data", (short) 2));
         assertTrue(service.save(m));
-    }
-
-    @Ignore
-    @Test
-    public void testDelete() {
-        Mahasiswa m = service.getMahasiswaByNim("075410099");
-        assertTrue(service.delete(m));
     }
 
 }
