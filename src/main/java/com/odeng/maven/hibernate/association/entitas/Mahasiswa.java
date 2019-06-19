@@ -14,6 +14,7 @@ package com.odeng.maven.hibernate.association.entitas;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -103,6 +104,43 @@ public class Mahasiswa implements Serializable {
     @Override
     public String toString() {
         return "Mahasiswa{" + "nim=" + nim + ", nama=" + nama + ", ipk=" + ipk + ", jurusan=" + jurusan + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.nim);
+        hash = 59 * hash + Objects.hashCode(this.nama);
+        hash = 59 * hash + Float.floatToIntBits(this.ipk);
+        hash = 59 * hash + Objects.hashCode(this.jurusan);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Mahasiswa other = (Mahasiswa) obj;
+        if (Float.floatToIntBits(this.ipk) != Float.floatToIntBits(other.ipk)) {
+            return false;
+        }
+        if (!Objects.equals(this.nim, other.nim)) {
+            return false;
+        }
+        if (!Objects.equals(this.nama, other.nama)) {
+            return false;
+        }
+        if (!Objects.equals(this.jurusan, other.jurusan)) {
+            return false;
+        }
+        return true;
     }
 
 }

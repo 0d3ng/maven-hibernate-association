@@ -45,15 +45,16 @@ public class MahasiswaServiceImplTest {
     public void testSave() {
         Mahasiswa m = new Mahasiswa("075410099", "Noprianto", 3.99F, "Teknologi Informasi");
         Mahasiswa m2 = new Mahasiswa("075410100", "Noureen Akhleema Shannum", 4F, "Teknologi Informasi");
-        
+
         Tugas t = new Tugas("Buat web menggunakan teknologi hibernate", new Date());
         Tugas t1 = new Tugas("Buat aplikasi mobile dengan penggunaan Fragment", new Date());
-       
-        assertTrue(serviceMhs.save(m));
-        assertTrue(serviceMhs.save(m2));
         assertTrue(tugasService.save(t));
         assertTrue(tugasService.save(t1));
-
+        m.addTugas(t1);
+        m.addTugas(t);
+        m2.addTugas(t);
+        assertTrue(serviceMhs.save(m));
+        assertTrue(serviceMhs.save(m2));
     }
 
 }
